@@ -1,5 +1,5 @@
 @echo off
-echo 🚀 Building Sentiment Analyzer Full-Stack Application...
+echo 🚀 Building Sentiment Analyzer Single Service...
 
 REM Build frontend
 echo 📦 Building frontend...
@@ -12,7 +12,7 @@ echo ✅ Frontend built successfully!
 
 REM Copy frontend build to backend directory
 echo 📁 Copying frontend build to backend...
-xcopy /E /I /Y frontend\out backend\out
+xcopy /E /I /Y frontend\out backend\frontend-build
 
 echo 🎉 Build complete! Ready for deployment.
 echo Run: cd backend && python main.py

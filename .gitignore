@@ -185,12 +185,13 @@ next-env.d.ts
 # yarn.lock
 # pnpm-lock.yaml
 
-# Deployment files (optional - uncomment if you want to ignore)
-# render.yaml
-# docker-compose.yml
+# Deployment files
+render.yaml
+docker-compose.yml
 
-# Build outputs
+# Build outputs (generated during deployment)
 backend/out/
 frontend/out/
 build/
+dist/
 

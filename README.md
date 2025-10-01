@@ -81,7 +81,7 @@ Sentiment Analyzer/
 - **Node.js 18+** (for frontend)
 - **npm** or **pnpm** (package manager)
 
-> **🚀 Single Service Deployment**: This project can be deployed as a single service with both backend and frontend combined! See [SINGLE_SERVICE_DEPLOYMENT.md](SINGLE_SERVICE_DEPLOYMENT.md) for details.
+> **🚀 Single Service Deployment**: This project deploys as a single service with both backend and frontend combined! See [NON_DOCKER_DEPLOYMENT.md](NON_DOCKER_DEPLOYMENT.md) for details.
 
 ### Backend Setup
 
@@ -156,29 +156,16 @@ npm run dev
 
 Visit `http://localhost:3000` to use the application!
 
-### Single Service Development
+## 🌐 **Production Deployment**
 
-To run both backend and frontend as a single service:
+For production deployment, we use a **single service** for maximum simplicity:
 
-1. **Build the frontend:**
-   ```bash
-   # On Windows:
-   build.bat
-   
-   # On macOS/Linux:
-   chmod +x build.sh
-   ./build.sh
-   ```
+- **Single Service**: Python Web Service on Render
+- **Frontend**: Served from same service
+- **Backend API**: `/api/*` endpoints
+- **One URL**: Everything at one URL!
 
-2. **Start the combined service:**
-   ```bash
-   cd backend
-   python main.py
-   ```
-
-Visit `http://localhost:8000` to use the combined application!
-- Frontend UI at the root
-- API docs at `http://localhost:8000/docs`
+See [NON_DOCKER_DEPLOYMENT.md](NON_DOCKER_DEPLOYMENT.md) for complete deployment instructions.
 
 ---
 

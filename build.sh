@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Building Sentiment Analyzer Full-Stack Application..."
+echo "🚀 Building Sentiment Analyzer Single Service..."
 
 # Build frontend
 echo "📦 Building frontend..."
@@ -13,7 +13,7 @@ echo "✅ Frontend built successfully!"
 
 # Copy frontend build to backend directory
 echo "📁 Copying frontend build to backend..."
-cp -r frontend/out backend/
+cp -r frontend/out backend/frontend-build
 
 echo "🎉 Build complete! Ready for deployment."
 echo "Run: cd backend && python main.py"

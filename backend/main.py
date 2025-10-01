@@ -23,14 +23,14 @@ app = FastAPI(
 )
 
 # Check if frontend build exists
-FRONTEND_BUILD_PATH = "../frontend/out"
-FRONTEND_STATIC_PATH = "../frontend/out/_next/static"
-FRONTEND_INDEX_PATH = "../frontend/out/index.html"
+FRONTEND_BUILD_PATH = "./frontend-build"
+FRONTEND_STATIC_PATH = "./frontend-build/_next/static"
+FRONTEND_INDEX_PATH = "./frontend-build/index.html"
 
-# Add CORS middleware
+# Add CORS middleware (not needed for same origin, but keeping for flexibility)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],  # React dev server
+    allow_origins=["*"],  # Allow all origins since we're serving from same origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
