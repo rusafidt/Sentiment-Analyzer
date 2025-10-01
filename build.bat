@@ -31,5 +31,5 @@ if errorlevel 1 (
 )
 
 echo 🎉 Build complete! Ready for deployment.
-echo Run: cd backend && python main.py
+echo Run: python backend\main.py
 pause
