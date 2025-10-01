@@ -8,7 +8,9 @@ A full-stack sentiment analysis application with separate frontend and backend s
 - **Modern Web Interface**: Built with Next.js 14 and Tailwind CSS
 - **RESTful API**: FastAPI backend with automatic documentation
 - **Machine Learning**: Trained on movie reviews dataset using NLTK and scikit-learn
-- **Separate Services**: Frontend and backend deployed independently
+- **Independent Services**: Frontend and backend can be deployed separately
+
+---
 
 ## 🏗️ Architecture
 
@@ -16,7 +18,8 @@ A full-stack sentiment analysis application with separate frontend and backend s
 - **Backend**: FastAPI (Python)
 - **ML Library**: scikit-learn with NLTK
 - **Styling**: Tailwind CSS with shadcn/ui components
-- **Deployment**: Separate Render.com services
+
+---
 
 ## 📁 Project Structure
 
@@ -33,10 +36,10 @@ sentiment-analyzer/
 │   ├── requirements.txt  # Python dependencies
 │   └── README.md         # Backend documentation
 ├── venv/                 # Python virtual environment
-├── render-backend.yaml   # Backend deployment config
-├── render-frontend.yaml  # Frontend deployment config
 └── README.md             # This file
 ```
+
+---
 
 ## 🛠️ Local Development
 
@@ -86,50 +89,12 @@ sentiment-analyzer/
 
    The frontend will be available at `http://localhost:3000`
 
-## 🚀 Deployment
-
-### Render.com Deployment (Separate Services)
-
-This project uses **completely separate** frontend and backend services:
-
-#### Backend Service (Deploy First)
-- **Service**: `sentiment-analyzer-backend`
-- **Type**: Python FastAPI
-- **URL**: `https://sentiment-analyzer-backend.onrender.com`
-- **Config**: `render-backend.yaml`
-- **API**: Public REST API for sentiment analysis
-
-#### Frontend Service (Deploy Second)
-- **Service**: `sentiment-analyzer-frontend`
-- **Type**: Node.js Next.js
-- **URL**: `https://sentiment-analyzer-frontend.onrender.com`
-- **Config**: `render-frontend.yaml`
-- **Connection**: Calls backend's public API
-
-### Deployment Steps
-
-1. **Deploy Backend First**:
-   - Create web service using `render-backend.yaml`
-   - Backend provides public API
-   - Test: `https://sentiment-analyzer-backend.onrender.com/api/health`
-
-2. **Deploy Frontend**:
-   - Create web service using `render-frontend.yaml`
-   - Set `BACKEND_URL` environment variable to backend URL
-   - Frontend calls backend's public API
-   - Test: `https://sentiment-analyzer-frontend.onrender.com`
-
-### Key Points:
-- ✅ **Completely Independent Services**
-- ✅ **No Shared Resources**
-- ✅ **Backend Provides Public API**
-- ✅ **Frontend Calls Backend API**
-- ✅ **Independent Scaling & Deployment**
+---
 
 ## 📚 API Documentation
 
 Once the backend is running, visit:
-- **API Docs**: `http://localhost:8000/docs` (local) or `https://your-backend-url.onrender.com/docs`
+- **API Docs**: `http://localhost:8000/docs`
 - **ReDoc**: `http://localhost:8000/redoc`
 
 ### API Endpoints
@@ -155,6 +120,8 @@ curl -X POST "http://localhost:8000/api/predict" \
 }
 ```
 
+---
+
 ## 🧪 Testing
 
 ### Backend Testing
@@ -173,6 +140,8 @@ curl -X POST "http://localhost:8000/api/predict" \
 
 Visit `http://localhost:3000` and test the web interface.
 
+---
+
 ## 🔧 Development
 
 ### Backend Development
@@ -188,6 +157,8 @@ Visit `http://localhost:3000` and test the web interface.
 - **Styling**: Tailwind CSS
 - **Components**: shadcn/ui component library
 - **TypeScript**: Full type safety
+
+---
 
 ## 📦 Dependencies
 
@@ -206,6 +177,8 @@ Visit `http://localhost:3000` and test the web interface.
 - Tailwind CSS 3.4.0
 - shadcn/ui components
 
+---
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -214,9 +187,14 @@ Visit `http://localhost:3000` and test the web interface.
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+---
+
+## 🚀 Live Demo
+
+**Frontend:** `https://sentiment-analyzer-frontend-hgb5.onrender.com/`
+
+---
 
 ## 🙏 Acknowledgments
 
