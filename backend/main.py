@@ -106,8 +106,10 @@ if os.path.exists(FRONTEND_BUILD_PATH):
     if os.path.exists(FRONTEND_STATIC_PATH):
         app.mount("/_next/static", StaticFiles(directory=FRONTEND_STATIC_PATH), name="static")
     
-    # Serve frontend files
-    app.mount("/assets", StaticFiles(directory=f"{FRONTEND_BUILD_PATH}/assets"), name="assets")
+    # Serve frontend files (only if assets directory exists)
+    assets_path = f"{FRONTEND_BUILD_PATH}/assets"
+    if os.path.exists(assets_path):
+        app.mount("/assets", StaticFiles(directory=assets_path), name="assets")
     
     # Serve other static files
     for file in ["favicon.ico", "robots.txt", "sitemap.xml"]:

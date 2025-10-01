@@ -190,8 +190,13 @@ render.yaml
 docker-compose.yml
 
 # Build outputs (generated during deployment)
-backend/out/
+backend/frontend-build/
 frontend/out/
 build/
 dist/
+
+# Virtual environment
+venv/
+env/
+.env
 

@@ -1,336 +1,165 @@
-# 🎭 Sentiment Analyzer  
+# Sentiment Analyzer
 
-A full-stack sentiment analysis application with FastAPI backend and Next.js frontend. Classifies text sentiment into **Positive/Negative** using **scikit-learn** and **NLTK**.
+A full-stack web application that analyzes the sentiment of text using machine learning. Built with FastAPI backend and Next.js frontend.
+
+## 🚀 Features
+
+- **Real-time Sentiment Analysis**: Analyze text sentiment using Naive Bayes classifier
+- **Modern Web Interface**: Built with Next.js 14 and Tailwind CSS
+- **RESTful API**: FastAPI backend with automatic documentation
+- **Machine Learning**: Trained on movie reviews dataset using NLTK and scikit-learn
+- **Responsive Design**: Works on desktop and mobile devices
+
+## 🏗️ Architecture
+
+- **Backend**: FastAPI (Python)
+- **Frontend**: Next.js 14 (React/TypeScript)
+- **ML Library**: scikit-learn with NLTK
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Deployment**: Ready for Render.com deployment
 
 ## 📁 Project Structure
 
 ```
-Sentiment Analyzer/
-├── backend/           # FastAPI backend
-│   ├── main.py       # Main application file
-│   ├── requirements.txt
-│   └── README.md
-├── frontend/          # Next.js frontend
-│   ├── app/          # Next.js app directory
-│   │   ├── api/      # API routes
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/   # React components
-│   │   ├── ui/       # UI components (Radix UI)
-│   │   └── theme-provider.tsx
-│   ├── lib/          # Utilities
-│   ├── hooks/        # Custom React hooks
-│   ├── public/       # Static assets
-│   ├── package.json
-│   └── README.md
-├── venv/             # Python virtual environment
-├── .gitignore        # Git ignore rules
-└── README.md         # This file
+sentiment-analyzer/
+├── backend/
+│   ├── main.py              # FastAPI application
+│   ├── requirements.txt     # Python dependencies
+│   └── README.md           # Backend documentation
+├── frontend/
+│   ├── app/                # Next.js app directory
+│   ├── components/         # React components
+│   ├── lib/               # Utility functions
+│   ├── package.json       # Node.js dependencies
+│   └── tailwind.config.js # Tailwind configuration
+├── build.bat              # Windows build script
+├── build.sh               # Linux/Mac build script
+├── render.yaml            # Render.com deployment config
+└── README.md              # This file
 ```
 
-## 🛠️ Technology Stack
-
-### Backend
-- **FastAPI** - Modern, fast web framework for building APIs
-- **Python 3.8+** - Programming language
-- **NLTK** - Natural Language Toolkit for text processing
-- **scikit-learn** - Machine learning library (Naive Bayes)
-- **uvicorn** - ASGI server for FastAPI
-
-### Frontend
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type-safe JavaScript
-- **Tailwind CSS** - Utility-first CSS framework
-- **Radix UI** - Accessible UI component library
-- **Lucide React** - Beautiful icons
-- **React Hook Form** - Form handling
-- **Zod** - Schema validation
-
-### Development Tools
-- **ESLint** - Code linting
-- **Prettier** - Code formatting
-- **PostCSS** - CSS processing  
-
----
-
-## 🚀 Features
-
-### Backend (FastAPI)
-- **FastAPI REST API** with automatic documentation
-- **Naive Bayes** model trained on NLTK movie reviews dataset  
-- **Real-time sentiment analysis** with confidence scores
-- **Interactive API docs** at `/docs`
-- **Health check endpoints** for monitoring
-- **CORS enabled** for frontend integration
-
-### Frontend (Next.js)
-- **Modern React UI** with Next.js 14 and TypeScript
-- **Beautiful design** using Radix UI components and Tailwind CSS
-- **Real-time sentiment analysis** with live results
-- **Responsive design** that works on all devices
-- **Dark theme** with smooth animations
-- **API integration** with backend sentiment analysis
-
----
-
-## ⚙️ Quick Start
+## 🛠️ Installation & Setup
 
 ### Prerequisites
-- **Python 3.8+** (for backend)
-- **Node.js 18+** (for frontend)
-- **npm** or **pnpm** (package manager)
 
-> **🚀 Single Service Deployment**: This project deploys as a single service with both backend and frontend combined! See [NON_DOCKER_DEPLOYMENT.md](NON_DOCKER_DEPLOYMENT.md) for details.
+- Python 3.11+
+- Node.js 18+
+- npm or yarn
 
 ### Backend Setup
 
-1. **Navigate to backend directory:**
-   ```bash
-   cd backend
-   ```
-
-2. **Create and activate virtual environment:**
+1. **Create and activate virtual environment**:
    ```bash
    python -m venv venv
-   # Windows:
-   venv\Scripts\activate
-   # macOS/Linux:
+   
+   # Windows
+   .\venv\Scripts\Activate.ps1
+   
+   # Linux/Mac
    source venv/bin/activate
    ```
 
-3. **Install dependencies:**
+2. **Install Python dependencies**:
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 
-4. **Run the backend server:**
+3. **Run the backend**:
    ```bash
+   cd backend
    python main.py
    ```
 
-The API will be available at `http://localhost:8000`
+   The API will be available at `http://localhost:8000`
 
 ### Frontend Setup
 
-1. **Navigate to frontend directory:**
+1. **Install Node.js dependencies**:
    ```bash
    cd frontend
-   ```
-
-2. **Install dependencies:**
-   ```bash
    npm install
-   # or
-   pnpm install
    ```
 
-3. **Create environment file:**
-   Create a `.env.local` file in the frontend directory:
-   ```
-   API_BASE_URL=http://localhost:8000
-   ```
-
-4. **Start development server:**
+2. **Run the development server**:
    ```bash
    npm run dev
-   # or
-   pnpm dev
    ```
 
-The frontend will run on `http://localhost:3000`
+   The frontend will be available at `http://localhost:3000`
 
-### Running Both Services
+### Full Stack Build
 
-**Terminal 1 (Backend):**
+Use the provided build scripts:
+
+**Windows**:
 ```bash
-cd backend
-python main.py
+.\build.bat
 ```
 
-**Terminal 2 (Frontend):**
+**Linux/Mac**:
 ```bash
-cd frontend
-npm run dev
+chmod +x build.sh
+./build.sh
 ```
 
-Visit `http://localhost:3000` to use the application!
+This will:
+1. Build the frontend
+2. Copy the build to backend directory
+3. Prepare for deployment
 
-## 🌐 **Production Deployment**
+## 🚀 Deployment
 
-For production deployment, we use a **single service** for maximum simplicity:
+### Render.com Deployment
 
-- **Single Service**: Python Web Service on Render
-- **Frontend**: Served from same service
-- **Backend API**: `/api/*` endpoints
-- **One URL**: Everything at one URL!
+The project is configured for Render.com deployment using `render.yaml`:
 
-See [NON_DOCKER_DEPLOYMENT.md](NON_DOCKER_DEPLOYMENT.md) for complete deployment instructions.
-
----
-
-## 📡 API Endpoints
-
-### 🔍 **POST** `/api/predict`
-Analyze sentiment of input text
-
-**Request:**
-```json
-{
-  "text": "I really loved this movie, it was amazing!"
-}
-```
-
-**Response:**
-```json
-{
-  "text": "I really loved this movie, it was amazing!",
-  "sentiment": "pos",
-  "confidence": 0.85
-}
-```
-
-### 🏥 **GET** `/api/health`
-Health check endpoint
-
-### 🎯 **GET** `/api/demo`
-Demo endpoint with sample predictions
-
-### 📚 **GET** `/docs`
-Interactive API documentation (Swagger UI)
-
-### 📖 **GET** `/redoc`
-Alternative API documentation
-
----
-
-## 🧪 Usage Examples
-
-### Using curl:
-```bash
-# Predict sentiment
-curl -X POST "http://localhost:8000/api/predict" \
-     -H "Content-Type: application/json" \
-     -d '{"text": "This movie is terrible and boring"}'
-
-# Health check
-curl "http://localhost:8000/api/health"
-
-# Demo
-curl "http://localhost:8000/api/demo"
-```
-
-### Using Python requests:
-```python
-import requests
-
-# Predict sentiment
-response = requests.post(
-    "http://localhost:8000/api/predict",
-    json={"text": "I love this movie!"}
-)
-result = response.json()
-print(f"Sentiment: {result['sentiment']}, Confidence: {result['confidence']}")
-```
-
----
-
-## 📝 Example Output
-```json
-{
-  "demo_results": [
-    {
-      "text": "I really loved this movie, it was amazing!",
-      "sentiment": "pos",
-      "confidence": 0.92
-    },
-    {
-      "text": "It was boring and too long.",
-      "sentiment": "neg", 
-      "confidence": 0.88
-    }
-  ]
-}
-```
-
----
-
-## 🚀 Development
-
-### Backend Development
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-pip install -r requirements.txt
-python main.py
-```
-
-### Frontend Development
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Building for Production
-
-**Backend:**
-```bash
-cd backend
-pip install -r requirements.txt
-python main.py
-```
-
-**Frontend:**
-```bash
-cd frontend
-npm run build
-npm start
-```
-
-## 🐳 Deployment
-
-### Docker (Recommended)
-```bash
-# Build and run with Docker Compose
-docker-compose up --build
-```
+1. Connect your GitHub repository to Render
+2. Render will automatically detect the configuration
+3. The build process will:
+   - Install Python dependencies
+   - Build the frontend
+   - Copy frontend build to backend
+   - Start the FastAPI server
 
 ### Manual Deployment
-1. **Backend:** Deploy to any Python hosting (Heroku, Railway, DigitalOcean)
-2. **Frontend:** Deploy to Vercel, Netlify, or any static hosting
 
-### Environment Variables
-- **Backend:** No additional environment variables needed
-- **Frontend:** Set `API_BASE_URL` to your deployed backend URL
+1. **Build the project**:
+   ```bash
+   # Windows
+   .\build.bat
+   
+   # Linux/Mac
+   ./build.sh
+   ```
 
-## 🔧 Troubleshooting
+2. **Deploy the backend**:
+   ```bash
+   cd backend
+   python main.py
+   ```
 
-### Common Issues
+## 📚 API Documentation
 
-**Backend won't start:**
-- Ensure Python 3.8+ is installed
-- Activate virtual environment before running
-- Check if port 8000 is available
+Once the backend is running, visit:
+- **API Docs**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
 
-**Frontend can't connect to backend:**
-- Verify backend is running on port 8000
-- Check `.env.local` file has correct `API_BASE_URL`
-- Ensure CORS is properly configured
+### API Endpoints
 
-**NLTK data download issues:**
-- The model automatically downloads NLTK data on first run
-- Ensure internet connection is available
+- `GET /` - Serve frontend or health check
+- `GET /api/health` - Health check endpoint
+- `POST /api/predict` - Analyze sentiment
+- `GET /api/demo` - Demo with sample predictions
 
-### Performance Tips
-- Backend model loads on startup (takes ~30 seconds)
-- Consider caching model for production
-- Use PM2 for backend process management
+### Example API Usage
 
-## 📊 API Response Format
+```bash
+# Analyze sentiment
+curl -X POST "http://localhost:8000/api/predict" \
+     -H "Content-Type: application/json" \
+     -d '{"text": "I love this movie!"}'
 
-```json
+# Response
 {
   "text": "I love this movie!",
   "sentiment": "pos",
@@ -338,28 +167,72 @@ docker-compose up --build
 }
 ```
 
-- `sentiment`: "pos" (positive) or "neg" (negative)
-- `confidence`: Float between 0.0 and 1.0
+## 🧪 Testing
+
+### Backend Testing
+
+```bash
+# Health check
+curl http://localhost:8000/api/health
+
+# Sentiment analysis
+curl -X POST "http://localhost:8000/api/predict" \
+     -H "Content-Type: application/json" \
+     -d '{"text": "This is amazing!"}'
+```
+
+### Frontend Testing
+
+Visit `http://localhost:3000` and test the web interface.
+
+## 🔧 Development
+
+### Backend Development
+
+- **Framework**: FastAPI
+- **ML Libraries**: scikit-learn, NLTK
+- **Model**: Naive Bayes classifier trained on movie reviews
+- **Features**: Text preprocessing, feature extraction, sentiment prediction
+
+### Frontend Development
+
+- **Framework**: Next.js 14 with App Router
+- **Styling**: Tailwind CSS
+- **Components**: shadcn/ui component library
+- **TypeScript**: Full type safety
+
+## 📦 Dependencies
+
+### Backend (Python)
+- FastAPI 0.104.1
+- Uvicorn 0.24.0
+- NLTK 3.9.1
+- scikit-learn 1.5.2
+- NumPy 2.3.3
+- SciPy 1.16.2
+
+### Frontend (Node.js)
+- Next.js 14.2.16
+- React 18
+- TypeScript 5
+- Tailwind CSS 3.4.0
+- shadcn/ui components
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test both backend and frontend
+4. Test thoroughly
 5. Submit a pull request
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
----
+## 🙏 Acknowledgments
 
-### 🔮 Future Improvements
-- Add transformers (BERT) version for modern sentiment analysis  
-- Add neutral sentiment category
-- Implement batch processing endpoint
-- Add user authentication and history
-- Deploy to cloud platform with CI/CD
-- Add real-time sentiment monitoring dashboard
-- Implement sentiment analysis for multiple languages  
+- Movie reviews dataset from NLTK
+- FastAPI for the excellent web framework
+- Next.js team for the React framework
+- shadcn/ui for the beautiful components
