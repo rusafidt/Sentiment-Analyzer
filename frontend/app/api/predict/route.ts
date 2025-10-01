@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     // Forward request to your backend
     const backendUrl = process.env.API_BASE_URL || "http://localhost:8000"
     const res = await fetch(
-      `${backendUrl}/predict`,  // 👈 proxy to backend
+      `${backendUrl}/api/predict`,  // 👈 proxy to backend
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

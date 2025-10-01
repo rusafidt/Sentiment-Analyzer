@@ -81,6 +81,8 @@ Sentiment Analyzer/
 - **Node.js 18+** (for frontend)
 - **npm** or **pnpm** (package manager)
 
+> **🚀 Single Service Deployment**: This project can be deployed as a single service with both backend and frontend combined! See [SINGLE_SERVICE_DEPLOYMENT.md](SINGLE_SERVICE_DEPLOYMENT.md) for details.
+
 ### Backend Setup
 
 1. **Navigate to backend directory:**
@@ -154,11 +156,35 @@ npm run dev
 
 Visit `http://localhost:3000` to use the application!
 
+### Single Service Development
+
+To run both backend and frontend as a single service:
+
+1. **Build the frontend:**
+   ```bash
+   # On Windows:
+   build.bat
+   
+   # On macOS/Linux:
+   chmod +x build.sh
+   ./build.sh
+   ```
+
+2. **Start the combined service:**
+   ```bash
+   cd backend
+   python main.py
+   ```
+
+Visit `http://localhost:8000` to use the combined application!
+- Frontend UI at the root
+- API docs at `http://localhost:8000/docs`
+
 ---
 
 ## 📡 API Endpoints
 
-### 🔍 **POST** `/predict`
+### 🔍 **POST** `/api/predict`
 Analyze sentiment of input text
 
 **Request:**
@@ -177,10 +203,10 @@ Analyze sentiment of input text
 }
 ```
 
-### 🏥 **GET** `/health`
+### 🏥 **GET** `/api/health`
 Health check endpoint
 
-### 🎯 **GET** `/demo`
+### 🎯 **GET** `/api/demo`
 Demo endpoint with sample predictions
 
 ### 📚 **GET** `/docs`
@@ -196,15 +222,15 @@ Alternative API documentation
 ### Using curl:
 ```bash
 # Predict sentiment
-curl -X POST "http://localhost:8000/predict" \
+curl -X POST "http://localhost:8000/api/predict" \
      -H "Content-Type: application/json" \
      -d '{"text": "This movie is terrible and boring"}'
 
 # Health check
-curl "http://localhost:8000/health"
+curl "http://localhost:8000/api/health"
 
 # Demo
-curl "http://localhost:8000/demo"
+curl "http://localhost:8000/api/demo"
 ```
 
 ### Using Python requests:
@@ -213,7 +239,7 @@ import requests
 
 # Predict sentiment
 response = requests.post(
-    "http://localhost:8000/predict",
+    "http://localhost:8000/api/predict",
     json={"text": "I love this movie!"}
 )
 result = response.json()
