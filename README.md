@@ -192,7 +192,7 @@ Visit `http://localhost:3000` and test the web interface.
 
 ## 🚀 Live Demo
 
-**Frontend:** `https://sentiment-analyzer-frontend-hgb5.onrender.com/`
+**Frontend:** [Sentiment Analyzer Link](https://sentiment-analyzer-frontend-hgb5.onrender.com)
 
 ---
 
