@@ -1,6 +1,6 @@
 # Sentiment Analyzer
 
-A full-stack web application that analyzes the sentiment of text using machine learning. Built with FastAPI backend and Next.js frontend.
+A full-stack sentiment analysis application with separate frontend and backend services. Built with Next.js frontend and FastAPI backend.
 
 ## 🚀 Features
 
@@ -8,37 +8,37 @@ A full-stack web application that analyzes the sentiment of text using machine l
 - **Modern Web Interface**: Built with Next.js 14 and Tailwind CSS
 - **RESTful API**: FastAPI backend with automatic documentation
 - **Machine Learning**: Trained on movie reviews dataset using NLTK and scikit-learn
-- **Responsive Design**: Works on desktop and mobile devices
+- **Separate Services**: Frontend and backend deployed independently
 
 ## 🏗️ Architecture
 
-- **Backend**: FastAPI (Python)
 - **Frontend**: Next.js 14 (React/TypeScript)
+- **Backend**: FastAPI (Python)
 - **ML Library**: scikit-learn with NLTK
 - **Styling**: Tailwind CSS with shadcn/ui components
-- **Deployment**: Ready for Render.com deployment
+- **Deployment**: Separate Render.com services
 
 ## 📁 Project Structure
 
 ```
 sentiment-analyzer/
-├── backend/
-│   ├── main.py              # FastAPI application
-│   ├── requirements.txt     # Python dependencies
-│   └── README.md           # Backend documentation
-├── frontend/
-│   ├── app/                # Next.js app directory
-│   ├── components/         # React components
-│   ├── lib/               # Utility functions
-│   ├── package.json       # Node.js dependencies
-│   └── tailwind.config.js # Tailwind configuration
-├── build.bat              # Windows build script
-├── build.sh               # Linux/Mac build script
-├── render.yaml            # Render.com deployment config
-└── README.md              # This file
+├── frontend/               # Next.js frontend
+│   ├── app/               # Next.js app directory
+│   ├── components/        # React components
+│   ├── lib/              # Utility functions
+│   ├── package.json      # Node.js dependencies
+│   └── next.config.mjs   # Next.js configuration
+├── backend/               # FastAPI backend
+│   ├── main.py           # FastAPI application
+│   ├── requirements.txt  # Python dependencies
+│   └── README.md         # Backend documentation
+├── venv/                 # Python virtual environment
+├── render-backend.yaml   # Backend deployment config
+├── render-frontend.yaml  # Frontend deployment config
+└── README.md             # This file
 ```
 
-## 🛠️ Installation & Setup
+## 🛠️ Local Development
 
 ### Prerequisites
 
@@ -66,8 +66,7 @@ sentiment-analyzer/
 
 3. **Run the backend**:
    ```bash
-   cd backend
-   python main.py
+   python backend/main.py
    ```
 
    The API will be available at `http://localhost:8000`
@@ -87,66 +86,55 @@ sentiment-analyzer/
 
    The frontend will be available at `http://localhost:3000`
 
-### Full Stack Build
-
-Use the provided build scripts:
-
-**Windows**:
-```bash
-.\build.bat
-```
-
-**Linux/Mac**:
-```bash
-chmod +x build.sh
-./build.sh
-```
-
-This will:
-1. Build the frontend
-2. Copy the build to backend directory
-3. Prepare for deployment
-
 ## 🚀 Deployment
 
-### Render.com Deployment
+### Render.com Deployment (Separate Services)
 
-The project is configured for Render.com deployment using `render.yaml`:
+This project uses **completely separate** frontend and backend services:
 
-1. Connect your GitHub repository to Render
-2. Render will automatically detect the configuration
-3. The build process will:
-   - Install Python dependencies
-   - Build the frontend
-   - Copy frontend build to backend
-   - Start the FastAPI server
+#### Backend Service (Deploy First)
+- **Service**: `sentiment-analyzer-backend`
+- **Type**: Python FastAPI
+- **URL**: `https://sentiment-analyzer-backend.onrender.com`
+- **Config**: `render-backend.yaml`
+- **API**: Public REST API for sentiment analysis
 
-### Manual Deployment
+#### Frontend Service (Deploy Second)
+- **Service**: `sentiment-analyzer-frontend`
+- **Type**: Node.js Next.js
+- **URL**: `https://sentiment-analyzer-frontend.onrender.com`
+- **Config**: `render-frontend.yaml`
+- **Connection**: Calls backend's public API
 
-1. **Build the project**:
-   ```bash
-   # Windows
-   .\build.bat
-   
-   # Linux/Mac
-   ./build.sh
-   ```
+### Deployment Steps
 
-2. **Deploy the backend**:
-   ```bash
-   cd backend
-   python main.py
-   ```
+1. **Deploy Backend First**:
+   - Create web service using `render-backend.yaml`
+   - Backend provides public API
+   - Test: `https://sentiment-analyzer-backend.onrender.com/api/health`
+
+2. **Deploy Frontend**:
+   - Create web service using `render-frontend.yaml`
+   - Set `BACKEND_URL` environment variable to backend URL
+   - Frontend calls backend's public API
+   - Test: `https://sentiment-analyzer-frontend.onrender.com`
+
+### Key Points:
+- ✅ **Completely Independent Services**
+- ✅ **No Shared Resources**
+- ✅ **Backend Provides Public API**
+- ✅ **Frontend Calls Backend API**
+- ✅ **Independent Scaling & Deployment**
 
 ## 📚 API Documentation
 
 Once the backend is running, visit:
-- **API Docs**: `http://localhost:8000/docs`
+- **API Docs**: `http://localhost:8000/docs` (local) or `https://your-backend-url.onrender.com/docs`
 - **ReDoc**: `http://localhost:8000/redoc`
 
 ### API Endpoints
 
-- `GET /` - Serve frontend or health check
+- `GET /` - API information
 - `GET /api/health` - Health check endpoint
 - `POST /api/predict` - Analyze sentiment
 - `GET /api/demo` - Demo with sample predictions

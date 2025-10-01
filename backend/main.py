@@ -5,12 +5,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Dict
 import uvicorn
-import os
 
 # Download dataset (only needed first time)
 nltk.download('movie_reviews')
@@ -22,15 +19,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Check if frontend build exists
-FRONTEND_BUILD_PATH = "./frontend-build"
-FRONTEND_STATIC_PATH = "./frontend-build/_next/static"
-FRONTEND_INDEX_PATH = "./frontend-build/index.html"
-
-# Add CORS middleware (not needed for same origin, but keeping for flexibility)
+# Add CORS middleware for API access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins since we're serving from same origin
+    allow_origins=["*"],  # Allow all origins for API access
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -100,35 +92,15 @@ async def startup_event():
     """Initialize the model when the app starts"""
     train_model()
 
-# Mount static files if frontend build exists
-if os.path.exists(FRONTEND_BUILD_PATH):
-    # Mount Next.js static assets
-    if os.path.exists(FRONTEND_STATIC_PATH):
-        app.mount("/_next/static", StaticFiles(directory=FRONTEND_STATIC_PATH), name="static")
-    
-    # Serve frontend files (only if assets directory exists)
-    assets_path = f"{FRONTEND_BUILD_PATH}/assets"
-    if os.path.exists(assets_path):
-        app.mount("/assets", StaticFiles(directory=assets_path), name="assets")
-    
-    # Serve other static files
-    for file in ["favicon.ico", "robots.txt", "sitemap.xml"]:
-        file_path = f"{FRONTEND_BUILD_PATH}/{file}"
-        if os.path.exists(file_path):
-            @app.get(f"/{file}")
-            async def serve_static_file(filename: str = file):
-                return FileResponse(file_path)
-
 @app.get("/")
 async def root():
-    """Root endpoint - serve frontend or health check"""
-    if os.path.exists(FRONTEND_INDEX_PATH):
-        return FileResponse(FRONTEND_INDEX_PATH)
-    else:
-        return HealthResponse(
-            status="healthy",
-            message="Sentiment Analyzer API is running! Frontend not built yet."
-        )
+    """Root endpoint - API information"""
+    return {
+        "message": "Sentiment Analyzer API",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "health": "/api/health"
+    }
 
 @app.get("/api/health", response_model=HealthResponse)
 async def health_check():
@@ -140,7 +112,7 @@ async def health_check():
 
 @app.get("/healthz", response_model=HealthResponse)
 async def healthz():
-    """Health check endpoint"""
+    """Health check endpoint (alternative)"""
     return HealthResponse(
         status="healthy",
         message="API is ready to analyze sentiment"
@@ -178,15 +150,6 @@ async def demo():
         })
     
     return {"demo_results": results}
-
-# Catch-all route for frontend routing (must be last)
-@app.get("/{full_path:path}")
-async def serve_frontend(full_path: str):
-    """Serve frontend for all other routes"""
-    if os.path.exists(FRONTEND_INDEX_PATH):
-        return FileResponse(FRONTEND_INDEX_PATH)
-    else:
-        return {"message": "Frontend not built. Please build the frontend first."}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
