@@ -84,6 +84,9 @@ curl -X POST https://sentiment-analyzer-backend.onrender.com/api/predict \
 - Check build logs for Node.js dependency errors
 - Verify `BACKEND_URL` environment variable is set correctly
 - Check browser console for API connection errors
+- **Common Issue**: If you see "Missing script: buildn" error, it's a Render caching issue
+  - Solution: Clear Render cache or redeploy
+  - Alternative: Use manual build command: `cd frontend && npm install && npm run build`
 
 ### Connection Issues:
 - Ensure backend is deployed and running first

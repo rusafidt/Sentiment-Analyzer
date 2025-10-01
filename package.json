@@ -1,0 +1,15 @@
+{
+  "name": "sentiment-analyzer",
+  "version": "1.0.0",
+  "description": "Sentiment Analyzer with separate frontend and backend services",
+  "scripts": {
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "start:frontend": "cd frontend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:backend": "pip install -r backend/requirements.txt",
+    "start:backend": "cd backend && python main.py"
+  },
+  "keywords": ["sentiment-analysis", "fastapi", "nextjs", "machine-learning"],
+  "author": "Rusafid Ahmed",
+  "license": "MIT"
+}
